@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — Weekenders Co.</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Weekenders Co.</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container product-page">
+    <div class="product-card">
+      <div class="product-image-col">
+        <!-- Replace product.jpg with your real product image -->
+        <img src="assets/product.jpg" alt="Navy Dog Skiing Beanie" class="product-image">
+      </div>
+
+      <div class="product-info-col">
+        <h1 class="product-title">Navy Dog Skiing Beanie</h1>
+        <p class="product-sku">SKU: WDR-BEANIE-01</p>
+
+        <!-- EDIT PRICE HERE -->
+        <div class="product-price" id="price">$45.00</div>
+
+        <p class="product-desc">Premium embroidered beanie. One size (stretch). Heavy knit, neat cuff, embroidered dog skiing motif. Limited drop.</p>
+
+        <div class="qty-row">
+          <label for="qty">Quantity</label>
+          <div class="qty-controls">
+            <button id="dec" class="qty-btn">−</button>
+            <input id="qty" type="number" value="1" min="1">
+            <button id="inc" class="qty-btn">+</button>
+          </div>
+        </div>
+
+        <div class="cart-actions">
+          <button id="addToCart" class="btn">Add to cart</button>
+          <button id="buyNow" class="btn btn-outline">Buy now</button>
+        </div>
+
+        <div class="cart-summary" id="cartSummary" aria-live="polite" style="display:none;">
+          <h4>Cart</h4>
+          <div id="cartItems"></div>
+          <div class="cart-total">Total: <span id="cartTotal">$0.00</span></div>
+          <div class="checkout-row">
+            <button id="checkoutEmail" class="btn">Checkout via Email</button>
+            <button id="copyOrder" class="btn btn-outline">Copy Order</button>
+          </div>
+          <p class="small">Or paste your PayPal/Stripe checkout link here when ready.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year2"></span> Weekenders Co.</div>
+      <div><a href="mailto:orders@weekendersco.com">orders@weekendersco.com</a></div>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+  <script>document.getElementById('year2').textContent = new Date().getFullYear();</script>
+</body>
+</html>
