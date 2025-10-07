@@ -23,9 +23,10 @@ body{
 
 .container{max-width:var(--maxwidth);margin:0 auto;padding:28px 20px;}
 
+/* Header / Nav */
 .site-header{border-bottom:1px solid #eee;background:#fff;position:sticky;top:0;z-index:30}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;}
-.logo{font-family:"Playfair Display", serif;font-size:20px;color:var(--accent);text-decoration:none;letter-spacing:0.6px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0;}
+.logo{font-family:"Playfair Display", serif;font-size:32px;color:var(--accent);text-decoration:none;letter-spacing:0.4px;font-weight:700} /* larger logo */
 .nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600}
 .nav .cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
 
@@ -45,8 +46,8 @@ body{
   margin-bottom:12px;
   box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.18); /* gentle dark overlay */
 }
-.hero-overlay{position:relative;color:#fff;text-align:center;z-index:2;padding:0 20px;max-width:800px}
-.hero-title{font-family:"Playfair Display",serif;font-size:40px;margin:0 0 8px;line-height:1.05}
+.hero-overlay{position:relative;color:#fff;text-align:center;z-index:2;padding:0 20px;max-width:900px}
+.hero-title{font-family:"Playfair Display",serif;font-size:42px;margin:0 0 8px;line-height:1.02}
 .hero-sub{margin:0 0 18px;color:#f4f6f8;font-weight:400}
 .btn{display:inline-block;padding:12px 18px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
 .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 14px}
@@ -92,5 +93,6 @@ body{
   .intro-grid{grid-template-columns:1fr}
   .product-card{grid-template-columns:1fr;gap:18px}
   .hero-title{font-size:28px}
+  .logo{font-size:26px}
   .hero{min-height:46vh}
 }
