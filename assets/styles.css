@@ -36,7 +36,8 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background-image: url('../assets/hero.jpg'); /* replace assets/hero.jpg with your photo */
+  /* The background image file should be placed at assets/skiing.jpg */
+  background-image: url('skiing.jpg');
   background-size:cover;
   background-position:center center;
   background-repeat:no-repeat;
