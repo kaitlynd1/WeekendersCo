@@ -1,0 +1,76 @@
+:root{
+  --accent:#0f4c81; /* preppy navy */
+  --accent-dark:#0b3a66;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --radius:12px;
+  --maxwidth:1100px;
+  --container-pad:20px;
+  --shadow: 0 6px 24px rgba(10,10,16,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  color:#111827;
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+.container{max-width:var(--maxwidth);margin:0 auto;padding:40px 20px;}
+
+.site-header{border-bottom:1px solid #eee;background:#fff;position:sticky;top:0;z-index:30}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+.logo{font-family:"Playfair Display", serif;font-size:22px;color:var(--accent);text-decoration:none;letter-spacing:0.6px}
+.nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600}
+.nav .cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+
+.hero{position:relative;height:58vh;min-height:360px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-image{width:100%;height:100%;object-fit:cover;filter:brightness(.45);display:block;position:absolute;left:0;top:0}
+.hero-overlay{position:relative;color:#fff;text-align:center;z-index:2;padding:0 20px}
+.hero-title{font-family:"Playfair Display",serif;font-size:38px;margin:0 0 10px;line-height:1.05}
+.hero-sub{margin:0 0 18px;color:#f4f6f8;font-weight:400}
+.btn{display:inline-block;padding:12px 18px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 14px}
+
+/* Intro grid */
+.intro-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:28px}
+.intro-text h2{font-family:"Playfair Display",serif;margin-top:0;margin-bottom:8px}
+.intro-image img{width:100%;border-radius:12px;box-shadow:var(--shadow);object-fit:cover}
+
+/* Story */
+.story{background:#fafafa;padding:32px;border-radius:12px;margin-top:28px}
+
+/* Product page */
+.product-page{padding-top:20px;padding-bottom:80px}
+.product-card{display:grid;grid-template-columns:420px 1fr;gap:36px;align-items:start}
+.product-image{width:100%;border-radius:12px;box-shadow:var(--shadow);display:block}
+.product-title{font-family:"Playfair Display",serif;font-size:28px;margin:0}
+.product-price{font-weight:700;font-size:22px;margin:12px 0;color:var(--accent)}
+.product-desc{color:var(--muted);margin-bottom:14px}
+.qty-row{display:flex;align-items:center;gap:12px;margin:12px 0}
+.qty-controls{display:flex;align-items:center;gap:8px}
+.qty-btn{padding:6px 10px;border-radius:8px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:18px}
+.qty-controls input{width:64px;padding:8px;border-radius:8px;border:1px solid #ddd;text-align:center}
+
+.cart-actions{display:flex;gap:12px;margin-top:12px}
+.cart-summary{margin-top:20px;padding:14px;border-radius:10px;border:1px solid #eee;background:#fff}
+.cart-total{font-weight:700;margin-top:8px}
+.checkout-row{display:flex;gap:8px;margin-top:12px}
+.small{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* Footer */
+.site-footer{border-top:1px solid #eee;margin-top:40px;background:#fff}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;font-size:14px;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:900px){
+  .intro-grid{grid-template-columns:1fr}
+  .product-card{grid-template-columns:1fr;gap:18px}
+  .hero-title{font-size:28px}
+  .hero{height:46vh}
+}
