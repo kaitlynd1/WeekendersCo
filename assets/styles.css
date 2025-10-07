@@ -21,29 +21,43 @@ body{
   line-height:1.45;
 }
 
-.container{max-width:var(--maxwidth);margin:0 auto;padding:40px 20px;}
+.container{max-width:var(--maxwidth);margin:0 auto;padding:28px 20px;}
 
 .site-header{border-bottom:1px solid #eee;background:#fff;position:sticky;top:0;z-index:30}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
-.logo{font-family:"Playfair Display", serif;font-size:22px;color:var(--accent);text-decoration:none;letter-spacing:0.6px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;}
+.logo{font-family:"Playfair Display", serif;font-size:20px;color:var(--accent);text-decoration:none;letter-spacing:0.6px}
 .nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-weight:600}
 .nav .cta{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
 
-.hero{position:relative;height:58vh;min-height:360px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.hero-image{width:100%;height:100%;object-fit:cover;filter:brightness(.45);display:block;position:absolute;left:0;top:0}
-.hero-overlay{position:relative;color:#fff;text-align:center;z-index:2;padding:0 20px}
-.hero-title{font-family:"Playfair Display",serif;font-size:38px;margin:0 0 10px;line-height:1.05}
+/* Hero uses background image to avoid extra white space */
+.hero{
+  position:relative;
+  min-height:64vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background-image: url('../assets/hero.jpg'); /* replace assets/hero.jpg with your photo */
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  color:#fff;
+  margin-bottom:12px;
+  box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.18); /* gentle dark overlay */
+}
+.hero-overlay{position:relative;color:#fff;text-align:center;z-index:2;padding:0 20px;max-width:800px}
+.hero-title{font-family:"Playfair Display",serif;font-size:40px;margin:0 0 8px;line-height:1.05}
 .hero-sub{margin:0 0 18px;color:#f4f6f8;font-weight:400}
 .btn{display:inline-block;padding:12px 18px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
 .btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent);padding:10px 14px}
 
 /* Intro grid */
-.intro-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:28px}
+.intro-grid{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:12px}
 .intro-text h2{font-family:"Playfair Display",serif;margin-top:0;margin-bottom:8px}
 .intro-image img{width:100%;border-radius:12px;box-shadow:var(--shadow);object-fit:cover}
 
-/* Story */
-.story{background:#fafafa;padding:32px;border-radius:12px;margin-top:28px}
+/* Story CTA */
+.story-cta{padding:10px 0}
+.story-cta .muted{color:var(--muted);font-size:15px}
 
 /* Product page */
 .product-page{padding-top:20px;padding-bottom:80px}
@@ -63,6 +77,11 @@ body{
 .checkout-row{display:flex;gap:8px;margin-top:12px}
 .small{font-size:13px;color:var(--muted);margin-top:8px}
 
+/* Story page */
+.story-page{padding-top:28px;padding-bottom:80px}
+.story-page h1{font-family:"Playfair Display",serif;font-size:34px;margin-bottom:8px}
+.story-page h3{margin-top:18px}
+
 /* Footer */
 .site-footer{border-top:1px solid #eee;margin-top:40px;background:#fff}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;font-size:14px;color:var(--muted)}
@@ -72,5 +91,5 @@ body{
   .intro-grid{grid-template-columns:1fr}
   .product-card{grid-template-columns:1fr;gap:18px}
   .hero-title{font-size:28px}
-  .hero{height:46vh}
+  .hero{min-height:46vh}
 }
