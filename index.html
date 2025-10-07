@@ -1,85 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekenders Co.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weekenders Co. — For Those Who Take Leisure Seriously</title>
+
+  <!-- Tailwind CDN (easy for GitHub Pages) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #F6F3EB;
-      color: #1C2230;
+    :root{
+      --navy: #0f2b4a; /* primary */
+      --cream: #F6F3EB;
+      --accent: #D4AF37; /* gold */
+      --burnt: #A64231;
+      --text: #0f2b4a;
     }
-    .hero {
-      background-color: #1C2230;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5rem 1rem;
+
+    body { font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--cream); color: var(--text); }
+
+    /* make hero text serif */
+    .hero-title { font-family: 'Playfair Display', serif; letter-spacing: -0.02em; }
+
+    /* subtle overlay for hero */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5,12,20,0.35) 0%, rgba(5,12,20,0.2) 40%, rgba(255,255,255,0.0) 100%);
+      pointer-events: none;
     }
-    .hero img {
-      max-width: 280px;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-    .rotate-container img {
-      display: none;
-      width: 180px;
-      margin: 0 auto;
-    }
-    .rotate-container img.active {
-      display: block;
+
+    /* product card image mask */
+    .card-img {
+      object-fit: cover;
+      height: 260px;
+      width: 100%;
+      border-radius: 14px;
     }
   </style>
 </head>
-<body>
+<body class="antialiased">
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <img src="beanie.jpg" alt="Dog Skiing Beanie" />
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">For Those Who Take Leisure Seriously.</h1>
-    <a href="shop.html" class="mt-4 inline-block bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 transition">
-      Shop the Winter Drop
-    </a>
-  </section>
+  <!-- TOP PROMO BAR -->
+  <div class="w-full bg-[var(--navy)] text-white text-center text-sm py-2">
+    OCTOBER NEW ARRIVALS ARE HERE! SHOP OUR LATEST FALL STYLES FOR THE FAMILY
+  </div>
 
-  <!-- ROTATING DOG DESIGNS -->
-  <section class="py-16 bg-white text-center">
-    <h2 class="text-3xl font-semibold mb-8">Our Dogs Know How to Weekend</h2>
-    <div class="rotate-container">
-      <img src="dog-skiing.png" class="active" alt="Dog Skiing" />
-      <img src="dog-golfing.png" alt="Dog Golfing" />
-      <img src="dog-surfing.png" alt="Dog Surfing" />
-      <img src="dog-hiking.png" alt="Dog Hiking" />
+  <!-- NAVBAR -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Left: Logo -->
+        <div class="flex items-center space-x-3">
+          <!-- Replace with your logo image if you have one -->
+          <a href="#" class="flex items-center gap-3">
+            <img src="logo-placeholder.png" alt="Weekenders Co. logo" class="h-10 w-10 object-contain rounded-md" />
+            <span class="text-2xl font-semibold tracking-wide" style="color:var(--navy); font-family: 'Playfair Display', serif;">Weekenders Co.</span>
+          </a>
+        </div>
+
+        <!-- Center: nav links (hidden on mobile) -->
+        <nav class="hidden md:flex gap-10 items-center text-sm font-medium text-[var(--navy)]">
+          <a href="#" class="hover:opacity-80">New</a>
+          <a href="#" class="hover:opacity-80">Men</a>
+          <a href="#" class="hover:opacity-80">Women</a>
+          <a href="#" class="hover:opacity-80">Kids</a>
+          <a href="#" class="text-[var(--burnt)] hover:opacity-90">Sale</a>
+          <a href="#" class="hover:opacity-80">Our Story</a>
+        </nav>
+
+        <!-- Right: icons -->
+        <div class="flex items-center gap-4">
+          <!-- search -->
+          <button aria-label="Search" class="hidden sm:inline-flex p-2 rounded hover:bg-gray-100">
+            <!-- simple magnifier -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" /></svg>
+          </button>
+
+          <!-- account -->
+          <button aria-label="Account" class="hidden sm:inline-flex p-2 rounded hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A12 12 0 0112 15c2.485 0 4.78.73 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </button>
+
+          <!-- cart -->
+          <a href="#" class="p-2 rounded hover:bg-gray-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6.1A2 2 0 007.8 21h8.4a2 2 0 001.99-1.65L19 13M7 13L5.4 5M16 21a1 1 0 100-2 1 1 0 000 2zM8 21a1 1 0 100-2 1 1 0 000 2z" /></svg>
+          </a>
+        </div>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <!-- STORY SECTION -->
-  <section class="py-16 px-6 md:px-16 bg-[#F6F3EB] text-center">
-    <h2 class="text-3xl font-semibold mb-4">Designed in Massachusetts. Made for Weekends.</h2>
-    <p class="text-lg max-w-2xl mx-auto">
-      Weekenders Co. is a leisurewear line celebrating dogs doing human things — designed in Massachusetts, made for ski weekends, beach days, and spontaneous road trips.
-    </p>
-  </section>
+  <!-- HERO -->
+  <!-- NOTE: Replace hero-beanie.jpg with your full-bleed hero photo (recommended size: 2000x1000) -->
+  <main>
+    <section class="relative">
+      <div class="relative overflow-hidden">
+        <img src="hero-beanie.jpg" alt="Dog Skiing Beanie" class="w-full h-[60vh] md:h-[70vh] object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-[rgba(2,6,23,0.45)] via-[rgba(2,6,23,0.15)] to-transparent"></div>
+
+        <div class="absolute inset-0 flex items-center justify-center px-6">
+          <div class="text-center max-w-3xl">
+            <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight mb-6">
+              For Those Who Take Leisure Seriously.
+            </h1>
+
+            <p class="text-white/90 text-lg md:text-xl mb-6">Weekenders Co. is a leisurewear line celebrating dogs doing human things. Designed in Massachusetts, made for ski weekends, beach days, and spontaneous road trips.</p>
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 items-center justify-center">
+              <a href="shop.html" class="inline-block bg-white text-[var(--navy)] px-6 py-3 rounded-md font-semibold shadow hover:translate-y-[-2px] transition">Shop the Winter Drop</a>
+              <a href="#collections" class="inline-block text-white border border-white/30 px-5 py-3 rounded-md hover:bg-white/10 transition">Explore Collections</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY PILLS (centered) -->
+    <section class="bg-white py-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+        <div class="flex flex-wrap gap-3 md:gap-5 justify-center">
+          <a href="#" class="px-5 py-2 rounded-full border text-sm font-medium text-[var(--navy)] border-gray-200 hover:bg-gray-50">Beanies</a>
+          <a href="#" class="px-5 py-2 rounded-full border text-sm font-medium text-[var(--navy)] border-gray-200 hover:bg-gray-50">Baseball Caps</a>
+          <a href="#" class="px-5 py-2 rounded-full border text-sm font-medium text-[var(--navy)] border-gray-200 hover:bg-gray-50">Crewnecks</a>
+          <a href="#" class="px-5 py-2 rounded-full border text-sm font-medium text-[var(--navy)] border-gray-200 hover:bg-gray-50">Accessories</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP BY CATEGORY CARDS -->
+    <section id="collections" class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl md:text-3xl font-semibold">Shop By Category</h2>
+          <a href="shop.html" class="text-sm text-[var(--navy)] font-medium">View all →</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Card 1 -->
+          <a href="#" class="group block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition">
+            <img src="category-ski.jpg" alt="Skiing Dog" class="card-img mb-4" />
+            <div class="text-lg font-medium text-[var(--navy)]">Skiing & Winter</div>
+            <p class="text-sm text-gray-600 mt-1">Beanies, scarves, and warm crewnecks made for slopeside lounging.</p>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="#" class="group block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition">
+            <img src="category-golf.jpg" alt="Golfing Dog" class="card-img mb-4" />
+            <div class="text-lg font-medium text-[var(--navy)]">Golf & Country</div>
+            <p class="text-sm text-gray-600 mt-1">Polos and caps that read like a club — playful, premium, relaxed fit.</p>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="#" class="group block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition">
+            <img src="category-surf.jpg" alt="Surfing Dog" class="card-img mb-4" />
+            <div class="text-lg font-medium text-[var(--navy)]">Beach & Summer</div>
+            <p class="text-sm text-gray-600 mt-1">Light tees, visors, and striped towels for long days by the water.</p>
+          </a>
+
+          <!-- Card 4 -->
+          <a href="#" class="group block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition">
+            <img src="category-casual.jpg" alt="Hiking Dog" class="card-img mb-4" />
+            <div class="text-lg font-medium text-[var(--navy)]">Everyday Weekend</div>
+            <p class="text-sm text-gray-600 mt-1">Quarters zips and crewnecks built for spontaneous road trips and coffee stops.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY / BRAND SECTION -->
+    <section class="py-16 bg-[var(--cream)]">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <h3 class="text-3xl font-semibold hero-title mb-4">Designed in Massachusetts. Made for Weekends.</h3>
+        <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+          Weekenders Co. is a leisurewear line celebrating dogs doing human things — designed in Massachusetts, made for ski weekends, beach days, and spontaneous road trips. Our pieces are small-batch, thoughtfully made, and built to be collected.
+        </p>
+        <div class="mt-8">
+          <a href="about.html" class="inline-block text-[var(--navy)] border border-[var(--navy)] px-6 py-3 rounded-md hover:bg-[var(--navy)] hover:text-white transition">Learn Our Story</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="py-8 bg-[#1C2230] text-center text-gray-300">
-    <p>&copy; 2025 Weekenders Co. All rights reserved.</p>
+  <footer class="bg-[var(--navy)] text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div>
+        <h4 class="text-lg font-semibold mb-3">Weekenders Co.</h4>
+        <p class="text-sm text-white/80">Designed in Massachusetts. For those who take leisure seriously.</p>
+      </div>
+
+      <div>
+        <h5 class="font-medium mb-2">Shop</h5>
+        <ul class="text-sm space-y-1 text-white/80">
+          <li><a href="#" class="hover:underline">Beanies</a></li>
+          <li><a href="#" class="hover:underline">Caps</a></li>
+          <li><a href="#" class="hover:underline">Crewnecks</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="font-medium mb-2">Connect</h5>
+        <ul class="text-sm space-y-1 text-white/80">
+          <li><a href="#" class="hover:underline">Instagram</a></li>
+          <li><a href="#" class="hover:underline">TikTok</a></li>
+          <li><a href="#" class="hover:underline">Wholesale</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-center text-xs text-white/60 mt-8">&copy; <span id="year"></span> Weekenders Co. All rights reserved.</div>
   </footer>
 
   <script>
-    // Rotate dog images every 2.5 seconds
-    const images = document.querySelectorAll('.rotate-container img');
-    let index = 0;
-    setInterval(() => {
-      images[index].classList.remove('active');
-      index = (index + 1) % images.length;
-      images[index].classList.add('active');
-    }, 2500);
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
