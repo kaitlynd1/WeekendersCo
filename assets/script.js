@@ -4,8 +4,8 @@ const ORDER_EMAIL = "orders@weekendersco.com"; // <-- EDIT THIS
 
 // product metadata — change if needed
 const PRODUCT = {
-  title: "Navy Dog Skiing Beanie",
-  sku: "WDR-BEANIE-01",
+  title: "The Summit Beanie",
+  sku: "WDR-SUMMIT-01",
   price: 45.00, // number, USD
 };
 
@@ -25,11 +25,11 @@ function init() {
   const checkoutEmail = document.getElementById('checkoutEmail');
   const copyOrder = document.getElementById('copyOrder');
   const priceEl = document.getElementById('price');
-  priceEl.textContent = formatMoney(PRODUCT.price);
+  if (priceEl) priceEl.textContent = formatMoney(PRODUCT.price);
 
   // quantity buttons
-  inc.onclick = ()=> qtyInput.value = parseInt(qtyInput.value || 1) + 1;
-  dec.onclick = ()=> {
+  if (inc) inc.onclick = ()=> qtyInput.value = parseInt(qtyInput.value || 1) + 1;
+  if (dec) dec.onclick = ()=> {
     qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1) - 1);
   };
 
@@ -39,6 +39,7 @@ function init() {
 
   function renderCart(){
     const cart = getCart();
+    if(!cartSummary) return;
     if(cart.length === 0){
       cartSummary.style.display = 'none';
       return;
@@ -58,7 +59,7 @@ function init() {
     cartTotalEl.textContent = formatMoney(total);
   }
 
-  addToCart.onclick = ()=>{
+  if (addToCart) addToCart.onclick = ()=>{
     const qty = Math.max(1, parseInt(qtyInput.value || 1));
     const cart = getCart();
     const existsIndex = cart.findIndex(i => i.sku === PRODUCT.sku);
@@ -71,19 +72,19 @@ function init() {
     renderCart();
   };
 
-  buyNow.onclick = ()=>{
+  if (buyNow) buyNow.onclick = ()=>{
     const qty = Math.max(1, parseInt(qtyInput.value || 1));
     const order = [{ sku: PRODUCT.sku, title: PRODUCT.title, price: PRODUCT.price, qty }];
     emailCheckout(order);
   };
 
-  checkoutEmail.onclick = ()=>{
+  if (checkoutEmail) checkoutEmail.onclick = ()=>{
     const cart = getCart();
     if(cart.length === 0) { alert("Cart is empty."); return; }
     emailCheckout(cart);
   };
 
-  copyOrder.onclick = ()=>{
+  if (copyOrder) copyOrder.onclick = ()=>{
     const cart = getCart();
     if(cart.length === 0) { alert("Cart is empty."); return; }
     const text = orderText(cart);
