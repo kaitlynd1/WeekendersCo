@@ -1,213 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Weekenders Co. — For Those Who Take Leisure Seriously</title>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --navy: #0f2b4a;
-      --cream: #F6F3EB;
-      --accent: #D4AF37;
-      --text: #0f2b4a;
-    }
-    body { font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--cream); color: var(--text); }
-    .hero-title { font-family: 'Playfair Display', serif; letter-spacing: -0.02em; }
-    .card-img { object-fit: cover; height: 420px; width: 100%; border-radius: 14px; }
-    @media (max-width: 640px) {
-      .card-img { height: 320px; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body class="antialiased">
-
-  <!-- PROMO BAR (Optional — small-batch note) -->
-  <div class="w-full bg-[var(--navy)] text-white text-center text-sm py-2">
-    SMALL BATCH LAUNCH — Limited quantities. Sign up for restock alerts.
-  </div>
-
-  <!-- NAVBAR -->
-  <header class="bg-white shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <div class="flex items-center gap-3">
-          <a href="#" class="flex items-center gap-3">
-            <img src="logo-placeholder.png" alt="Weekenders Co. logo" class="h-10 w-10 object-contain rounded-md" />
-            <span class="text-2xl font-semibold tracking-wide" style="color:var(--navy); font-family: 'Playfair Display', serif;">Weekenders Co.</span>
-          </a>
-        </div>
-
-        <!-- Simple nav -->
-        <nav class="hidden md:flex gap-8 items-center text-sm font-medium text-[var(--navy)]">
-          <a href="#" class="hover:opacity-80">Home</a>
-          <a href="shop.html" class="hover:opacity-80">Shop</a>
-          <a href="about.html" class="hover:opacity-80">About</a>
-          <a href="wholesale.html" class="hover:opacity-80">Wholesale</a>
-        </nav>
-
-        <!-- icons -->
-        <div class="flex items-center gap-4">
-          <a href="#" class="hidden sm:inline-flex p-2 rounded hover:bg-gray-100" aria-label="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" /></svg>
-          </a>
-          <a href="#" class="hidden sm:inline-flex p-2 rounded hover:bg-gray-100" aria-label="Account">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A12 12 0 0112 15c2.485 0 4.78.73 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          </a>
-          <a href="#" class="p-2 rounded hover:bg-gray-100" aria-label="Cart">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--navy)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6.1A2 2 0 007.8 21h8.4a2 2 0 001.99-1.65L19 13M7 13L5.4 5M16 21a1 1 0 100-2 1 1 0 000 2zM8 21a1 1 0 100-2 1 1 0 000 2z" /></svg>
-          </a>
-        </div>
-      </div>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Weekenders Co.</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html" class="cta">Shop the Winter Drop</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HERO -->
   <main>
-    <section class="relative">
-      <div class="relative overflow-hidden">
-        <!-- Replace hero-beanie.jpg with your hero image -->
-        <img src="hero-beanie.jpg" alt="Dog Skiing Beanie" class="w-full h-[60vh] md:h-[72vh] object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-b from-[rgba(2,6,23,0.45)] via-[rgba(2,6,23,0.15)] to-transparent"></div>
-
-        <div class="absolute inset-0 flex items-center justify-center px-6">
-          <div class="text-center max-w-3xl">
-            <h1 class="hero-title text-3xl md:text-5xl lg:text-6xl text-white font-extrabold leading-tight mb-4">
-              For Those Who Take Leisure Seriously.
-            </h1>
-
-            <p class="text-white/90 text-lg md:text-xl mb-6">Weekenders Co. is a small-batch leisurewear line celebrating dogs doing human things. Designed in Massachusetts, made for ski weekends, beach days, and spontaneous road trips.</p>
-
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 items-center justify-center">
-              <a href="shop.html" class="inline-block bg-white text-[var(--navy)] px-6 py-3 rounded-md font-semibold shadow hover:translate-y-[-2px] transition">Shop the Winter Drop</a>
-              <a href="#products" class="inline-block text-white border border-white/30 px-5 py-3 rounded-md hover:bg-white/10 transition">See Products</a>
-            </div>
-          </div>
-        </div>
+    <!-- Hero -->
+    <section class="hero">
+      <!-- Replace hero.jpg with your product/hero image in assets/ -->
+      <img src="assets/hero.jpg" alt="Weekenders Co. Dog Skiing Beanie" class="hero-image">
+      <div class="hero-overlay">
+        <h1 class="hero-title">For Those Who Take Leisure Seriously.</h1>
+        <p class="hero-sub">Designed in Massachusetts. Made for weekends.</p>
+        <a class="btn" href="shop.html">Shop the Winter Drop</a>
       </div>
     </section>
 
-    <!-- SHORT CTA ROW for the two SKUs -->
-    <section class="bg-white py-6">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
-        <div class="text-center">
-          <div class="text-xs text-gray-500 uppercase">Launch Line</div>
-          <div class="text-lg font-semibold text-[var(--navy)]">Two Products — One Dog, Many Weekends</div>
-        </div>
-
-        <div class="flex gap-3">
-          <a href="#beanie" class="px-4 py-2 rounded-full border border-gray-200 text-sm text-[var(--navy)] hover:bg-gray-50">Beanie — Navy</a>
-          <a href="#cap" class="px-4 py-2 rounded-full border border-gray-200 text-sm text-[var(--navy)] hover:bg-gray-50">Baseball Cap — Navy</a>
-        </div>
+    <!-- Product preview -->
+    <section class="container intro-grid">
+      <div class="intro-text">
+        <h2>The Launch Hat</h2>
+        <p>Single product launch: premium embroidered beanie featuring our signature dog-on-skis artwork. Limited run. Heavy knit, stitched label, neat packaging — simple and elevated.</p>
+        <ul>
+          <li>Premium 12oz knit</li>
+          <li>Embroidery, not print</li>
+          <li>One colorway: Navy</li>
+        </ul>
+        <a class="btn" href="shop.html">Buy the Beanie</a>
+      </div>
+      <div class="intro-image">
+        <img src="assets/product-preview.jpg" alt="Beanie preview">
       </div>
     </section>
 
-    <!-- PRODUCTS (two cards) -->
-    <section id="products" class="py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <!-- Beanie Card -->
-          <article id="beanie" class="bg-white p-6 rounded-2xl shadow-sm group">
-            <div class="overflow-hidden rounded-lg">
-              <img src="product-beanie.jpg" alt="Navy Dog Skiing Beanie" class="card-img" />
-            </div>
-
-            <div class="mt-5">
-              <h3 class="text-2xl font-semibold text-[var(--navy)]">Navy Dog Skiing Beanie</h3>
-              <p class="text-sm text-gray-600 mt-2">Premium embroidered patch, heavy ribbed knit cuff. Small-batch winter drop.</p>
-
-              <div class="mt-4 flex items-center gap-4">
-                <div class="text-xl font-semibold">$45</div>
-                <a href="shop.html#beanie" class="ml-auto inline-block bg-[var(--navy)] text-white px-5 py-2 rounded-md font-medium hover:opacity-90">Buy Beanie</a>
-              </div>
-
-              <ul class="mt-4 text-xs text-gray-500 space-y-1">
-                <li>One size (folded cuff)</li>
-                <li>100% ribbed acrylic, soft hand</li>
-                <li>Embroidered patch — same artwork as cap</li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Cap Card -->
-          <article id="cap" class="bg-white p-6 rounded-2xl shadow-sm group">
-            <div class="overflow-hidden rounded-lg">
-              <img src="product-cap.jpg" alt="Navy Dog Skiing Baseball Cap" class="card-img" />
-            </div>
-
-            <div class="mt-5">
-              <h3 class="text-2xl font-semibold text-[var(--navy)]">Navy Dog Skiing Baseball Cap</h3>
-              <p class="text-sm text-gray-600 mt-2">Structured mid-profile cap with adjustable strap and the same premium embroidered patch.</p>
-
-              <div class="mt-4 flex items-center gap-4">
-                <div class="text-xl font-semibold">$48</div>
-                <a href="shop.html#cap" class="ml-auto inline-block bg-[var(--navy)] text-white px-5 py-2 rounded-md font-medium hover:opacity-90">Buy Cap</a>
-              </div>
-
-              <ul class="mt-4 text-xs text-gray-500 space-y-1">
-                <li>One size fits most — adjustable strap</li>
-                <li>60/40 cotton-poly twill</li>
-                <li>Same embroidered artwork — different silhouette</li>
-              </ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SMALL-BATCH STORY -->
-    <section class="py-16 bg-[var(--cream)]">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <h3 class="text-3xl font-semibold hero-title mb-4">Designed in Massachusetts. Made for Weekends.</h3>
-        <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-          Weekenders Co. started as a small project: celebrate the weekend and the dogs who live it best. We produce small runs, prioritize quality embroidery, and release seasonal drops so you get something worth collecting. Sign up for restock alerts — these sell out.
-        </p>
-
-        <div class="mt-8">
-          <a href="about.html" class="inline-block text-[var(--navy)] border border-[var(--navy)] px-6 py-3 rounded-md hover:bg-[var(--navy)] hover:text-white transition">Learn Our Story</a>
-        </div>
-      </div>
+    <!-- Brand story -->
+    <section class="container story">
+      <h3>Weekenders Co.</h3>
+      <p>We celebrate dogs doing human things and the people who make time for weekends. Small batches, careful finish, and a look that reads elevated but not precious.</p>
+      <p>Start small. Sell well. Keep margins sane.</p>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-[var(--navy)] text-white py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div>
-        <h4 class="text-lg font-semibold mb-3">Weekenders Co.</h4>
-        <p class="text-sm text-white/80">Small-batch leisurewear. For those who take leisure seriously.</p>
-      </div>
-
-      <div>
-        <h5 class="font-medium mb-2">Shop</h5>
-        <ul class="text-sm space-y-1 text-white/80">
-          <li><a href="#beanie" class="hover:underline">Beanie</a></li>
-          <li><a href="#cap" class="hover:underline">Baseball Cap</a></li>
-          <li><a href="shop.html" class="hover:underline">All Products</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5 class="font-medium mb-2">Connect</h5>
-        <ul class="text-sm space-y-1 text-white/80">
-          <li><a href="#" class="hover:underline">Instagram</a></li>
-          <li><a href="#" class="hover:underline">TikTok</a></li>
-          <li><a href="wholesale.html" class="hover:underline">Wholesale</a></li>
-        </ul>
-      </div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Weekenders Co.</div>
+      <div><a href="mailto:orders@weekendersco.com">orders@weekendersco.com</a></div>
     </div>
-
-    <div class="text-center text-xs text-white/60 mt-8">&copy; <span id="year"></span> Weekenders Co. All rights reserved.</div>
   </footer>
 
   <script>
+    // quick year injection
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
