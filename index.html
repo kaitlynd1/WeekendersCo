@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekenders Co.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F6F3EB;
+      color: #1C2230;
+    }
+    .hero {
+      background-color: #1C2230;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+    .hero img {
+      max-width: 280px;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    .rotate-container img {
+      display: none;
+      width: 180px;
+      margin: 0 auto;
+    }
+    .rotate-container img.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <img src="beanie.jpg" alt="Dog Skiing Beanie" />
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">For Those Who Take Leisure Seriously.</h1>
+    <a href="shop.html" class="mt-4 inline-block bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 transition">
+      Shop the Winter Drop
+    </a>
+  </section>
+
+  <!-- ROTATING DOG DESIGNS -->
+  <section class="py-16 bg-white text-center">
+    <h2 class="text-3xl font-semibold mb-8">Our Dogs Know How to Weekend</h2>
+    <div class="rotate-container">
+      <img src="dog-skiing.png" class="active" alt="Dog Skiing" />
+      <img src="dog-golfing.png" alt="Dog Golfing" />
+      <img src="dog-surfing.png" alt="Dog Surfing" />
+      <img src="dog-hiking.png" alt="Dog Hiking" />
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
+  <section class="py-16 px-6 md:px-16 bg-[#F6F3EB] text-center">
+    <h2 class="text-3xl font-semibold mb-4">Designed in Massachusetts. Made for Weekends.</h2>
+    <p class="text-lg max-w-2xl mx-auto">
+      Weekenders Co. is a leisurewear line celebrating dogs doing human things — designed in Massachusetts, made for ski weekends, beach days, and spontaneous road trips.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-8 bg-[#1C2230] text-center text-gray-300">
+    <p>&copy; 2025 Weekenders Co. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Rotate dog images every 2.5 seconds
+    const images = document.querySelectorAll('.rotate-container img');
+    let index = 0;
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 2500);
+  </script>
+</body>
+</html>
