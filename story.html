@@ -20,48 +20,37 @@
     </div>
   </header>
 
-  <!-- Full-bleed hero -->
+  <!-- Hero: Full-width family landscape photo -->
   <section class="story-hero">
-    <div class="story-hero-inner">
-      <h1 class="story-hero-title">Our Story</h1>
+    <img src="assets/family-landscape.jpg" alt="The Donato family outdoors in Sedona" class="story-hero-img">
+    <div class="story-hero-overlay">
+      <h1>Our Story</h1>
     </div>
   </section>
 
   <main>
-    <section class="story-content">
-      <p class="story-lead">Weekenders Co. is a family-built brand founded on the promise of a life lived outside.</p>
+    <section class="story-split container">
+      <div class="story-text">
+        <p class="story-lead"><strong>Weekenders Co. is a family-built brand founded on the promise of a life lived outside.</strong></p>
 
-      <p>Growing up, my dad instilled in me a love for the outdoors. He always made sure our dog and I were packed up and ready to go, whether it was finding fresh powder on a mountain, tackling a new bike trail, or jumping into the nearest lake.</p>
+        <p>Growing up, my dad instilled in me a love for the outdoors. He always made sure our dog and I were packed up and ready to go, whether it was finding fresh powder on a mountain, tackling a new bike trail, or jumping into the nearest lake.</p>
 
-      <p>But as I looked in my closet, I noticed my clothing didn't match the quality or authenticity of those memories. I wanted durable, fun gear that truly expressed the freedom of adventure.</p>
+        <p>But as I looked in my closet, I noticed my clothing didn't match the quality or authenticity of those memories. I wanted durable, fun gear that truly expressed the freedom of adventure.</p>
 
-      <p>So, I started Weekenders Co. It’s a family commitment to our lifestyle. We're relentlessly focused on higher quality materials to ensure every piece is tough enough for the trail, comfortable for the drive home, and meaningful to your story.</p>
+        <p>So, I started Weekenders Co. It’s a family commitment to our lifestyle. We're relentlessly focused on higher quality materials to ensure every piece is tough enough for the trail, comfortable for the drive home, and meaningful to your story.</p>
 
-      <p>And since nothing expresses love for freedom and fun better than a dog, we've made them the heart of our brand. They are our ultimate companions, always ready to go and reminding us to keep things simple.</p>
+        <p>And since nothing expresses love for freedom and fun better than a dog, we've made them the heart of our brand. They are our ultimate companions, always ready to go and reminding us to keep things simple.</p>
 
-      <p>Thank you for joining us on this brand new journey. We can't wait to see where you take your Weekenders gear.</p>
+        <p>Thank you for joining us on this brand new journey. We can't wait to see where you take your Weekenders gear.</p>
 
-      <p class="signature">- Kaitlyn & Family, Weekenders Co.</p>
+        <p class="signature">- Kaitlyn & Family, Weekenders Co.</p>
+      </div>
 
-      <!-- Two-photo section -->
-      <div class="story-photos">
-        <a class="story-photo gallery-item" href="assets/family-landscape.jpg">
-          <img src="assets/family-landscape.jpg" alt="Our family together outdoors">
-          <span class="story-caption">Our whole family on a weekend escape</span>
-        </a>
-
-        <a class="story-photo gallery-item" href="assets/dad-dog-hike.jpg">
-          <img src="assets/dad-dog-hike.jpg" alt="Dad and our dog on a hike by a waterfall">
-          <span class="story-caption">Dad and our dog after a long hike</span>
-        </a>
+      <div class="story-photo-right">
+        <img src="assets/dad-dog-hike.jpg" alt="Dad and our dog on a hike by a waterfall">
+        <span class="story-caption">Dad and our dog after a long hike</span>
       </div>
     </section>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-      <img id="lightboxImg" src="" alt="">
-    </div>
   </main>
 
   <footer class="site-footer">
@@ -73,37 +62,6 @@
 
   <script>
     document.getElementById('year2').textContent = new Date().getFullYear();
-
-    // Lightbox for .gallery-item
-    (function () {
-      const links = document.querySelectorAll('.gallery-item');
-      const lb = document.getElementById('lightbox');
-      const img = document.getElementById('lightboxImg');
-      const closeBtn = document.getElementById('lightboxClose');
-      if (!lb) return;
-
-      links.forEach(a => {
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          img.src = a.getAttribute('href');
-          img.alt = a.querySelector('img')?.alt || '';
-          lb.classList.add('open');
-          lb.setAttribute('aria-hidden','false');
-          document.body.style.overflow = 'hidden';
-        });
-      });
-
-      function closeLb(){
-        lb.classList.remove('open');
-        lb.setAttribute('aria-hidden','true');
-        img.src = '';
-        document.body.style.overflow = '';
-      }
-
-      closeBtn.addEventListener('click', closeLb);
-      lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
-    })();
   </script>
 </body>
 </html>
