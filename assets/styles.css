@@ -39,7 +39,6 @@ body {
   font-family: "Playfair Display", serif;
   font-size: 32px;
   font-weight: 700;
-  letter-spacing: 0.4px;
   color: var(--accent);
   text-decoration: none;
 }
@@ -78,7 +77,7 @@ body {
   border-radius: 10px;
 }
 
-/* ============ Hero ============ */
+/* ============ Hero (Homepage) ============ */
 .hero {
   position: relative;
   min-height: 64vh;
@@ -88,9 +87,7 @@ body {
   background-image: url('skiing.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   color: #fff;
-  margin-bottom: 12px;
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.18);
 }
 .hero-overlay {
@@ -150,7 +147,6 @@ body {
   text-decoration: none;
   box-shadow: 0 8px 18px rgba(15, 76, 129, 0.12);
   border: none;
-  display: inline-block;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .story-btn:hover {
@@ -170,7 +166,6 @@ body {
   width: 100%;
   border-radius: 12px;
   box-shadow: var(--shadow);
-  display: block;
 }
 .product-title {
   font-family: "Playfair Display", serif;
@@ -189,22 +184,33 @@ body {
 .story-hero {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 80vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 .story-hero-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 35%;
+  object-fit: contain; /* show entire image, no cropping */
+  object-position: center;
   display: block;
+  background-color: #000;
+}
+.story-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.6));
 }
 .story-hero-overlay {
   position: absolute;
   bottom: 40px;
   left: 40px;
   color: #fff;
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 .story-hero-overlay h1 {
   font-family: "Playfair Display", serif;
@@ -273,7 +279,7 @@ body {
   .hero-title { font-size: 28px; }
   .logo { font-size: 26px; }
   .hero { min-height: 46vh; }
-  .story-hero { height: 45vh; }
+  .story-hero { height: 60vh; }
   .story-hero-overlay h1 { font-size: 36px; }
   .story-split { grid-template-columns: 1fr; }
   .story-photo-right { margin-top: 24px; }
