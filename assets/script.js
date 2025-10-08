@@ -1,204 +1,193 @@
 /* assets/script.js
-   Weekenders Co. - simple cart + email checkout
-   Edit ORDER_EMAIL to receive order emails.
+   Weekenders Co. — simple cart + variants + email checkout
+   Set window.PRODUCT in each PDP before loading this file.
 */
 
-const ORDER_EMAIL = "orders@weekendersco.com"; // <-- change this to your order email
+const ORDER_EMAIL = "orders@weekendersco.com"; // change if needed
 
-// Product metadata — change if needed
-const PRODUCT = {
-  title: "The Summit Beanie",
-  sku: "WDR-SUMMIT-01",
-  price: 45.00 // USD number
-};
+// -------- helpers --------
+function formatMoney(n){ return "$" + Number(n).toFixed(2); }
+function el(id){ return document.getElementById(id); }
+function escapeHtml(str){ return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-// -------- helper functions --------
-function formatMoney(n) {
-  return "$" + Number(n).toFixed(2);
-}
-
-function safeQuery(id) {
-  return document.getElementById(id);
-}
-
-// -------- cart helpers (localStorage) --------
+// -------- cart storage --------
 const CART_KEY = "w_cart";
+function getCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch(e){ localStorage.removeItem(CART_KEY); return []; } }
+function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); }
+function clearCart(){ saveCart([]); }
 
-function getCart() {
-  try {
-    return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-  } catch (e) {
-    console.warn("Failed to parse cart from localStorage. Resetting cart.", e);
-    localStorage.removeItem(CART_KEY);
-    return [];
-  }
-}
-
-function saveCart(cart) {
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-}
-
-function clearCart() {
-  saveCart([]);
+// -------- product --------
+function currentProduct(){
+  const fallback = { title:"Product", sku:"SKU-UNKNOWN", price:0, options:[] };
+  const p = (typeof window !== "undefined" && window.PRODUCT) ? window.PRODUCT : fallback;
+  // normalize
+  p.options = Array.isArray(p.options) ? p.options : [];
+  p.optionValues = p.optionValues || {};
+  return p;
 }
 
 // Build a plain text order summary
-function orderText(items) {
+function orderText(items){
   let total = 0;
   const lines = ["Order from Weekenders Co.", "", "Items:"];
-  items.forEach(it => {
-    lines.push(`${it.title} (SKU ${it.sku}) x ${it.qty} - ${formatMoney(it.price)} each - ${formatMoney(it.price * it.qty)}`);
+  items.forEach(it=>{
+    const opts = it.selectedOptions && Object.keys(it.selectedOptions).length
+      ? " [" + Object.entries(it.selectedOptions).map(([k,v])=>`${k}: ${v}`).join(", ") + "]"
+      : "";
+    lines.push(`${it.title}${opts} (SKU ${it.sku}) x ${it.qty} - ${formatMoney(it.price)} each - ${formatMoney(it.price*it.qty)}`);
     total += it.price * it.qty;
   });
   lines.push("", `Total: ${formatMoney(total)}`, "", "Customer details: (paste name, address, phone here)");
   return lines.join("\n");
 }
 
-// Open user's mail client with prefilled order (mailto)
-function emailCheckout(items) {
+function emailCheckout(items){
   const subject = encodeURIComponent(`Weekenders Co. order - ${new Date().toISOString().slice(0,10)}`);
   const body = encodeURIComponent(orderText(items));
-  const mailto = `mailto:${ORDER_EMAIL}?subject=${subject}&body=${body}`;
-  // navigate to mailto to open email client
-  window.location.href = mailto;
+  window.location.href = `mailto:${ORDER_EMAIL}?subject=${subject}&body=${body}`;
 }
 
-// -------- render cart UI --------
-function renderCartUI() {
-  const cartSummary = safeQuery("cartSummary");
-  const cartItems = safeQuery("cartItems");
-  const cartTotalEl = safeQuery("cartTotal");
-
-  if (!cartSummary || !cartItems || !cartTotalEl) return;
+// -------- UI: render cart summary --------
+function renderCartUI(){
+  const cartSummary = el("cartSummary");
+  const cartItems = el("cartItems");
+  const cartTotal = el("cartTotal");
+  if(!cartSummary || !cartItems || !cartTotal) return;
 
   const cart = getCart();
-  if (cart.length === 0) {
-    cartSummary.style.display = "none";
-    return;
-  }
-
+  if(cart.length === 0){ cartSummary.style.display = "none"; return; }
   cartSummary.style.display = "block";
   cartItems.innerHTML = "";
 
   let total = 0;
-  cart.forEach(item => {
+  cart.forEach(it=>{
     const row = document.createElement("div");
     row.style.display = "flex";
     row.style.justifyContent = "space-between";
     row.style.padding = "6px 0";
-    row.innerHTML = `<div>${escapeHtml(item.title)} x ${item.qty}</div><div>${formatMoney(item.qty * item.price)}</div>`;
+    const opts = it.selectedOptions && Object.keys(it.selectedOptions).length
+      ? " [" + Object.entries(it.selectedOptions).map(([k,v])=>`${escapeHtml(k)}: ${escapeHtml(v)}`).join(", ") + "]"
+      : "";
+    row.innerHTML = `<div>${escapeHtml(it.title)}${opts} x ${it.qty}</div><div>${formatMoney(it.qty * it.price)}</div>`;
     cartItems.appendChild(row);
-    total += item.qty * item.price;
+    total += it.qty * it.price;
   });
-
-  cartTotalEl.textContent = formatMoney(total);
+  cartTotal.textContent = formatMoney(total);
 }
 
-// minimal escape for inserted text
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+// -------- options handling (size, etc.) --------
+function renderOptions(p){
+  const wrap = el("options");
+  if(!wrap || !p.options || p.options.length === 0) return {};
+
+  const selected = {};
+  p.options.forEach(name=>{
+    const values = p.optionValues[name] || [];
+    values.forEach((v, idx)=>{
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "opt-btn";
+      btn.textContent = v;
+      btn.dataset.optName = name;
+      btn.dataset.optValue = v;
+      if(idx === 2 || (idx === 1 && values.length <= 3)){ // pick a sensible default (M if exists)
+        selected[name] = v;
+        btn.classList.add("active");
+      }
+      btn.addEventListener("click", ()=>{
+        // deactivate siblings
+        wrap.querySelectorAll(`.opt-btn[data-opt-name="${name}"]`).forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        selected[name] = v;
+      });
+      wrap.appendChild(btn);
+    });
+  });
+  return selected;
 }
 
 // -------- main init --------
-function init() {
-  // Elements that should exist on product page
-  const qtyInput = safeQuery("qty");
-  const inc = safeQuery("inc");
-  const dec = safeQuery("dec");
-  const addToCart = safeQuery("addToCart");
-  const buyNow = safeQuery("buyNow");
-  const checkoutEmail = safeQuery("checkoutEmail");
-  const copyOrder = safeQuery("copyOrder");
-  const priceEl = safeQuery("price");
+function init(){
+  const p = currentProduct();
 
-  // Set price display if element exists
-  if (priceEl) priceEl.textContent = formatMoney(PRODUCT.price);
+  // price
+  const priceEl = el("price");
+  if(priceEl) priceEl.textContent = formatMoney(p.price);
 
-  // quantity controls (if present)
-  if (qtyInput) {
-    // ensure numeric default
-    qtyInput.value = Math.max(1, parseInt(qtyInput.value || "1", 10));
-  }
-  if (inc && qtyInput) {
-    inc.addEventListener("click", () => {
-      qtyInput.value = Math.max(1, parseInt(qtyInput.value || "1", 10) + 1);
-    });
-  }
-  if (dec && qtyInput) {
-    dec.addEventListener("click", () => {
-      qtyInput.value = Math.max(1, parseInt(qtyInput.value || "1", 10) - 1);
-    });
-  }
+  // qty controls
+  const qty = el("qty"), inc = el("inc"), dec = el("dec");
+  if(qty){ qty.value = Math.max(1, parseInt(qty.value||"1",10)); }
+  if(inc && qty){ inc.addEventListener("click", ()=> qty.value = Math.max(1, parseInt(qty.value||"1",10)+1)); }
+  if(dec && qty){ dec.addEventListener("click", ()=> qty.value = Math.max(1, parseInt(qty.value||"1",10)-1)); }
 
-  // Add to cart
-  if (addToCart && qtyInput) {
-    addToCart.addEventListener("click", () => {
-      const qty = Math.max(1, parseInt(qtyInput.value || "1", 10));
+  // options
+  let selectedOptions = renderOptions(p);
+
+  // add to cart
+  const add = el("addToCart");
+  if(add && qty){
+    add.addEventListener("click", ()=>{
+      const q = Math.max(1, parseInt(qty.value||"1",10));
+      // collect latest selected
+      const btnActive = document.querySelectorAll(".opt-btn.active");
+      selectedOptions = {};
+      btnActive.forEach(b=> selectedOptions[b.dataset.optName] = b.dataset.optValue);
+
       const cart = getCart();
-      const index = cart.findIndex(i => i.sku === PRODUCT.sku);
-      if (index >= 0) {
-        cart[index].qty += qty;
+      // consider sku + options as unique key
+      const key = p.sku + JSON.stringify(selectedOptions||{});
+      const idx = cart.findIndex(i => (i.key === key));
+      if(idx >= 0){
+        cart[idx].qty += q;
       } else {
-        cart.push({ sku: PRODUCT.sku, title: PRODUCT.title, price: PRODUCT.price, qty });
+        cart.push({
+          key,
+          sku: p.sku,
+          title: p.title,
+          price: p.price,
+          qty: q,
+          selectedOptions
+        });
       }
       saveCart(cart);
       renderCartUI();
-      // brief visual feedback
-      addToCart.textContent = "Added";
-      setTimeout(() => addToCart.textContent = "Add to cart", 900);
+      add.textContent = "Added";
+      setTimeout(()=> add.textContent = "Add to bag", 900);
     });
   }
 
-  // Buy now (immediate mailto for single product)
-  if (buyNow && qtyInput) {
-    buyNow.addEventListener("click", () => {
-      const qty = Math.max(1, parseInt(qtyInput.value || "1", 10));
-      const order = [{ sku: PRODUCT.sku, title: PRODUCT.title, price: PRODUCT.price, qty }];
+  // buy now
+  const buy = el("buyNow");
+  if(buy && qty){
+    buy.addEventListener("click", ()=>{
+      const q = Math.max(1, parseInt(qty.value||"1",10));
+      const btnActive = document.querySelectorAll(".opt-btn.active");
+      selectedOptions = {};
+      btnActive.forEach(b=> selectedOptions[b.dataset.optName] = b.dataset.optValue);
+
+      const order = [{ sku: p.sku, title: p.title, price: p.price, qty: q, selectedOptions }];
       emailCheckout(order);
     });
   }
 
-  // Checkout via email (uses cart)
-  if (checkoutEmail) {
-    checkoutEmail.addEventListener("click", () => {
-      const cart = getCart();
-      if (!cart || cart.length === 0) {
-        alert("Cart is empty.");
-        return;
-      }
-      emailCheckout(cart);
-    });
-  }
+  // checkout + copy order
+  const checkout = el("checkoutEmail");
+  if(checkout){ checkout.addEventListener("click", ()=> {
+    const cart = getCart();
+    if(!cart.length) return alert("Cart is empty.");
+    emailCheckout(cart);
+  });}
 
-  // Copy order text to clipboard
-  if (copyOrder) {
-    copyOrder.addEventListener("click", async () => {
-      const cart = getCart();
-      if (!cart || cart.length === 0) {
-        alert("Cart is empty.");
-        return;
-      }
-      const txt = orderText(cart);
-      try {
-        await navigator.clipboard.writeText(txt);
-        alert("Order copied to clipboard.");
-      } catch (e) {
-        // fallback: open a prompt with the text so user can copy manually
-        window.prompt("Copy your order", txt);
-      }
-    });
-  }
+  const copyOrder = el("copyOrder");
+  if(copyOrder){ copyOrder.addEventListener("click", async ()=>{
+    const cart = getCart();
+    if(!cart.length) return alert("Cart is empty.");
+    const txt = orderText(cart);
+    try{ await navigator.clipboard.writeText(txt); alert("Order copied to clipboard."); }
+    catch(e){ window.prompt("Copy your order", txt); }
+  });}
 
-  // Optional: hide cart summary if empty on load
   renderCartUI();
 }
 
-// run when DOM is loaded
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
+if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
