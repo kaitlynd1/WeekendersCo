@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sticker Pack — Weekenders Co.</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .gallery img{width:100%;border-radius:12px;box-shadow:var(--shadow);object-fit:cover;height:420px}
+    .pdp-right{padding:6px}
+    @media (max-width:900px){.product-card{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.gallery img{height:340px}}
+  </style>
+  <script>
+    window.PRODUCT = {
+      title: "Weekenders Sticker Pack (3)",
+      sku: "WDR-STICK-03",
+      price: 10.00,
+      options: [] /* no sizes */
+    };
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html">Weekenders Co.</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="story.html">Our Family Story</a>
+      <a href="shop.html" class="cta">Shop the Winter Drop</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container product-page">
+  <div class="product-card">
+    <div>
+      <div class="gallery">
+        <img src="assets/stickers.jpg" alt="Weekenders sticker pack">
+        <img src="assets/stickers.jpg" alt="Sticker detail">
+      </div>
+    </div>
+
+    <div class="pdp-right">
+      <h1 class="product-title">Sticker Pack</h1>
+      <div class="product-price" id="price"></div>
+
+      <div class="product-desc">
+        A three pack featuring the Skiing Retriever. Durable vinyl with a matte finish. Slap them on coolers, water bottles, and skis.
+      </div>
+
+      <div class="qty-row">
+        <div class="qty-controls">
+          <button id="dec" class="qty-btn" type="button">−</button>
+          <input id="qty" type="number" min="1" value="1"/>
+          <button id="inc" class="qty-btn" type="button">+</button>
+        </div>
+      </div>
+
+      <div class="cart-actions">
+        <button id="addToCart" class="btn" type="button">Add to bag</button>
+        <button id="buyNow" class="btn btn-outline" type="button">Buy now</button>
+      </div>
+
+      <div id="cartSummary" class="cart-summary" style="display:none;">
+        <div id="cartItems"></div>
+        <div class="cart-total">Total: <span id="cartTotal">$0.00</span></div>
+        <div class="checkout-row">
+          <button id="checkoutEmail" class="btn" type="button">Checkout by email</button>
+          <button id="copyOrder" class="btn btn-outline" type="button">Copy order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>© <span id="year"></span> Weekenders Co.</div>
+    <div><a href="mailto:orders@weekendersco.com">orders@weekendersco.com</a></div>
+  </div>
+</footer>
+<script src="assets/script.js"></script>
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>
