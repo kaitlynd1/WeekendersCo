@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Our Family Story — Weekenders Co.</title>
+  <title>Our Story — Weekenders Co.</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
@@ -22,21 +22,45 @@
 
   <main class="container story-page">
     <article>
-      <h1>Our Family Story</h1>
+      <h1>Our Story: Adventure Built From Scratch</h1>
 
-      <p>We started Weekenders Co. because the people we love were already teaching us how to spend our time: outside, roughing it a little, laughing a lot. Dogs do this best — they don’t wait for the perfect conditions, they make the moment. That’s the engine behind every product we design.</p>
+      <p>Weekenders Co. is a family company built on an old promise: a life lived outside.</p>
 
-      <h3>What matters to us</h3>
-      <p>Simple things done well: durable materials, thoughtful fit, and gear that looks at home on a trailhead or a coffee shop. We make pieces you’ll actually use, not something to file away as “nice.”</p>
+      <p>For as long as I can remember, my dad has been my adventure guide. He always made sure our dog and I were packed up and ready to go, whether it was finding fresh powder on a mountain, tackling a new bike trail, or jumping into the nearest lake. He taught me about the unconditional joys of the outdoors and the simple bliss of a weekend spent having fun.</p>
 
-      <h3>Family-first design</h3>
-      <p>This is a small, family-focused company. We ask real people (our siblings, parents, cousins) to test everything, wear it for a season, and tell us what to fix. The Summit Beanie started at a kitchen table and became what it is because our family refused to let it feel flimsy.</p>
+      <p>But as I looked in my closet, I saw clothes that felt generic and did not match the memories we were making. I wanted gear that was as authentic, durable, and fun as those family adventures, perfectly expressing that feeling of freedom you get when your dog is running full tilt ahead of you, living completely in the moment.</p>
 
-      <h3>Want the production details?</h3>
-      <p>If you want specifics on materials, production runs, or wholesale, email <a href="mailto:orders@weekendersco.com">orders@weekendersco.com</a> and we’ll send what you need.</p>
+      <h3>The Launch: Family Driven Quality</h3>
 
-      <p><a class="btn" href="shop.html">Shop the Winter Drop</a></p>
+      <p>So, this year, I decided to start Weekenders Co. This is more than a business idea; it is a family commitment to the lifestyle we love.</p>
+
+      <p>As a new company, we are starting small, but we are relentless about quality. We know that the best adventures require reliable gear, so we are focused on sourcing higher quality materials that are designed to last. Every piece we create has to be tough enough for the trail, comfortable enough for the drive home, and meaningful enough to become a part of your own adventure story.</p>
+
+      <h3>Built for Freedom and Fur</h3>
+
+      <p>We believe that nothing expresses love for freedom and fun better than a dog. They are our ultimate companions, always ready to go and always reminding us to keep things simple. Our clothes are designed to be lived in, enjoyed, and shared on every journey with your best friend.</p>
+
+      <p>Thank you for joining us on this brand new journey. We can't wait to see where you take your Weekenders gear.</p>
+
+      <p style="margin-top:20px;"><em>— Kaitlyn Donato & Family, Weekenders Co.</em></p>
     </article>
+
+    <!-- Family gallery -->
+    <section class="family-gallery container">
+      <h3>Family Photos</h3>
+      <div class="gallery-grid">
+        <!-- Replace these filenames with your actual images in assets/ -->
+        <a href="assets/family-1.jpg" class="gallery-item"><img src="assets/family-1.jpg" alt="Family photo 1"></a>
+        <a href="assets/family-2.jpg" class="gallery-item"><img src="assets/family-2.jpg" alt="Family photo 2"></a>
+        <a href="assets/family-3.jpg" class="gallery-item"><img src="assets/family-3.jpg" alt="Family photo 3"></a>
+      </div>
+    </section>
+
+    <!-- Lightbox overlay -->
+    <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+      <img id="lightboxImg" src="" alt="">
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -46,6 +70,44 @@
     </div>
   </footer>
 
-  <script>document.getElementById('year2').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year2').textContent = new Date().getFullYear();
+
+    // Simple lightbox for gallery
+    (function () {
+      const galleryLinks = document.querySelectorAll('.gallery-item');
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      const lbClose = document.getElementById('lightboxClose');
+
+      if (!lb) return;
+
+      galleryLinks.forEach(a => {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          lbImg.src = href;
+          lbImg.alt = this.querySelector('img').alt || '';
+          lb.classList.add('open');
+          lb.setAttribute('aria-hidden', 'false');
+        });
+      });
+
+      function closeLb() {
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        lbImg.src = '';
+      }
+
+      lbClose.addEventListener('click', closeLb);
+      lb.addEventListener('click', function (e) {
+        if (e.target === lb) closeLb();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLb();
+      });
+    })();
+  </script>
 </body>
 </html>
